@@ -1,0 +1,34 @@
+<!-- 新增活動頁面 -->
+ <!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>新增活動 - 廢墟版活動報名平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container my-5" style="max-width: 600px;">
+        <a href="/" class="btn btn-link mb-3">&larr; 返回活動列表</a>
+        
+        <div class="card shadow p-4">
+            <h2 class="mb-3">🏗️ 新增活動</h2>
+            <hr>
+            
+            <!-- 對應路由 POST /events，並帶有 title 與 description 欄位 -->
+            <form method="POST" action="/events">
+                <div class="mb-3">
+                    <label for="title" class="form-label">活動名稱</label>
+                    <input type="text" class="form-control" id="title" name="title" required placeholder="請輸入活動標題">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">活動描述</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="請輸入活動詳細說明..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-dark w-100">確認新增活動</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
