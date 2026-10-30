@@ -15,7 +15,7 @@ from fastapi.templating import Jinja2Templates
 from db import getDB
 
 router = APIRouter()
-templates = Jinja2Templates(directory="template")  #C 的資料夾叫 template (沒有 s)
+templates = Jinja2Templates(directory="templates")  #C 的畫面放在 templates/ 資料夾
 
 
 # 好幾個網址都要「用 id 查一個活動」，所以抽成一個小函式，避免同一段 SQL 寫三次
