@@ -17,3 +17,10 @@ INSERT INTO "registrations" ("event_id", "name", "phone_number", "sign_id") VALU
 (1,	'洪想你',	'0966123456',	11111);
 
 -- 2026-10-30 07:19:13 UTC
+
+ALTER TABLE "public"."registrations"
+ADD CONSTRAINT "fk_registrations_event_id" 
+FOREIGN KEY ("event_id") 
+REFERENCES "public"."activities" ("event_id")
+ON UPDATE CASCADE
+ON DELETE CASCADE;
