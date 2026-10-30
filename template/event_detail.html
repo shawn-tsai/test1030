@@ -1,0 +1,34 @@
+<!-- 活動報名頁面 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ event.title }} - 報名表</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container my-5" style="max-width: 600px;">
+        <a href="/" class="btn btn-link mb-3">&larr; 返回活動列表</a>
+        
+        <div class="card shadow p-4">
+            <h2>{{ event.title }}</h2>
+            <p class="text-muted">{{ event.description }}</p>
+            <hr>
+
+            <h4>填寫報名表</h4>
+            <!-- 送出 POST 請求到後端的報名 API -->
+            <form action="/events/{{ event.id }}/register" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">姓名</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">連絡電話</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">確認送出報名</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
