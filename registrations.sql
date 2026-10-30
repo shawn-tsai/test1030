@@ -16,7 +16,8 @@ WITH (oids = false);
 
 INSERT INTO "registrations" ("event_id", "title", "name", "phone_number", "sign_id") VALUES
 (1,'暨大馬拉松',	'洪想你',	'0966123456',	11111);
-
+(2,'校園演唱會',	'王員瑛',	'0973382476',	11112);
+(3,'排球新生盃',	'文阿棼',	'0966666666',	11113);
 SELECT setval('registrations_sign_id_seq', (SELECT MAX(sign_id) FROM registrations));
 
 -- 2026-10-30 07:19:13 UTC
