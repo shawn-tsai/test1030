@@ -12,22 +12,33 @@
         
         <div class="card shadow p-4">
             <h2>{{ event.title }}</h2>
-            <p class="text-muted">{{ event.description }}</p>
+            <p class="text-muted mb-1">📅 活動日期：{{ event.date }}</p>
+            <p class="text-muted mb-1">⏰ 報名截止：{{ event.deadline }}</p>
+            <p class="mb-0">👥 目前報名人數：<strong>{{ event.signed }}</strong> 人</p>
             <hr>
 
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            {% if event.closed %}
+            <div class="alert alert-secondary text-center mb-0">此活動已截止報名</div>
+            {% else %}
             <h4>填寫報名表</h4>
             <!-- 送出 POST 請求到後端的報名 API -->
             <form action="/events/{{ event.id }}/register" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">姓名</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ name or '' }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">連絡電話</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ phone or '' }}" required maxlength="20" placeholder="例如 0912-345-678 或 02-1234-5678">
+                    <div class="form-text">限台灣手機或市話，可含空白或 -，不可有英文</div>
                 </div>
                 <button type="submit" class="btn btn-success w-100">確認送出報名</button>
             </form>
+            {% endif %}
         </div>
     </div>
 </body>

@@ -19,9 +19,18 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text text-muted">{{ event.description }}</p>
+                        <p class="card-text text-muted mb-1">📅 活動日期：{{ event.date }}</p>
+                        <p class="card-text text-muted mb-1">⏰ 報名截止：{{ event.deadline }}</p>
+                        <p class="card-text mb-3">
+                            👥 目前報名人數：<strong>{{ event.signed }}</strong> 人
+                            {% if event.closed %}<span class="badge bg-secondary ms-1">已截止</span>{% endif %}
+                        </p>
                         <div class="d-flex justify-content-between align-items-center">
+                            {% if event.closed %}
+                            <button class="btn btn-secondary btn-sm" disabled>已截止報名</button>
+                            {% else %}
                             <a href="/events/{{ event.id }}" class="btn btn-primary btn-sm">查看並報名</a>
+                            {% endif %}
                             <a href="/events/{{ event.id }}/participants" class="btn btn-outline-secondary btn-sm">查看名單</a>
                         </div>
                     </div>

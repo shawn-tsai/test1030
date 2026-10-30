@@ -9,7 +9,8 @@ CREATE TABLE "public"."registrations" (
     "name" character varying(30) NOT NULL,
     "phone_number" character varying(15) NOT NULL,
     "sign_id" integer DEFAULT nextval('registrations_sign_id_seq') NOT NULL,
-    CONSTRAINT "registrations_pkey" PRIMARY KEY ("sign_id")
+    CONSTRAINT "registrations_pkey" PRIMARY KEY ("sign_id"),
+    CONSTRAINT "registrations_phone_check" CHECK ("phone_number" ~ '^0[2-9][0-9]{7,8}$')
 )
 WITH (oids = false);
 

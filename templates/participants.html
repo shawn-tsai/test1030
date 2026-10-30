@@ -12,6 +12,10 @@
         
         <div class="card shadow p-4">
             <h2>📋 {{ event.title }} - 報名清單</h2>
+            <p class="mb-0">
+                👥 目前報名人數：<strong>{{ participants | length }}</strong> 人
+                {% if event.closed %}<span class="badge bg-secondary ms-1">已截止</span>{% endif %}
+            </p>
             <hr>
             <table class="table table-striped">
                 <thead>
