@@ -6,6 +6,7 @@ CREATE SEQUENCE registrations_sign_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 922337
 
 CREATE TABLE "public"."registrations" (
     "event_id" integer NOT NULL,
+    "title" character varying(100) NOT NULL,
     "name" character varying(30) NOT NULL,
     "phone_number" character varying(15) NOT NULL,
     "sign_id" integer DEFAULT nextval('registrations_sign_id_seq') NOT NULL,
@@ -13,8 +14,8 @@ CREATE TABLE "public"."registrations" (
 )
 WITH (oids = false);
 
-INSERT INTO "registrations" ("event_id", "name", "phone_number", "sign_id") VALUES
-(1,	'洪想你',	'0966123456',	11111);
+INSERT INTO "registrations" ("event_id", "title", "name", "phone_number", "sign_id") VALUES
+(1,'暨大馬拉松',	'洪想你',	'0966123456',	11111);
 
 SELECT setval('registrations_sign_id_seq', (SELECT MAX(sign_id) FROM registrations));
 
@@ -24,5 +25,12 @@ ALTER TABLE "public"."registrations"
 ADD CONSTRAINT "fk_registrations_event_id" 
 FOREIGN KEY ("event_id") 
 REFERENCES "public"."activities" ("event_id")
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+ALTER TABLE "public"."registrations"
+ADD CONSTRAINT "fk_registrations_title" 
+FOREIGN KEY ("title") 
+REFERENCES "public"."activities" ("title")
 ON UPDATE CASCADE
 ON DELETE CASCADE;
