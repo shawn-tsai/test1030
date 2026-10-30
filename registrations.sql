@@ -16,4 +16,6 @@ WITH (oids = false);
 INSERT INTO "registrations" ("event_id", "name", "phone_number", "sign_id") VALUES
 (1,	'洪想你',	'0966123456',	11111);
 
+SELECT setval('registrations_sign_id_seq', (SELECT MAX(sign_id) FROM registrations));
+
 -- 2026-10-30 07:19:13 UTC
