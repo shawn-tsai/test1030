@@ -1,3 +1,4 @@
+from datetime import date
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -6,15 +7,17 @@ from db import getDB
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
+EVENT_COLUMNS = "event_id AS id, title, date"
+
 
 async def getEvent(db, eid):
-	cur = await db.execute("SELECT * FROM events WHERE id=%s;", (eid,))
+	cur = await db.execute(f"SELECT {EVENT_COLUMNS} FROM activities WHERE event_id=%s;", (eid,))
 	return await cur.fetchone()
 
 
 @router.get("/events")
 async def eventList(request: Request, db=Depends(getDB)):
-	cur = await db.execute("SELECT * FROM events ORDER BY id;")
+	cur = await db.execute(f"SELECT {EVENT_COLUMNS} FROM activities ORDER BY date, event_id;")
 	data = await cur.fetchall()
 	return templates.TemplateResponse(name="index.html", request=request, context={"events": data})
 
@@ -24,10 +27,10 @@ async def eventNew(request: Request):
 	return templates.TemplateResponse(name="event_new.html", request=request)
 
 @router.post("/events")
-async def eventInsert(title: str = Form(...), description: str = Form(""), db=Depends(getDB)):
+async def eventInsert(title: str = Form(...), eventDate: date = Form(..., alias="date"), db=Depends(getDB)):
 	await db.execute(
-		"INSERT INTO events (title, description) VALUES (%s, %s);",
-		(title, description),
+		"INSERT INTO activities (title, date) VALUES (%s, %s);",
+		(title, eventDate),
 	)
 	return RedirectResponse(url="/events", status_code=303)
 
