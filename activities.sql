@@ -13,10 +13,12 @@ CREATE TABLE "public"."activities" (
 WITH (oids = false);
 
 INSERT INTO "activities" ("event_id", "title", "date") VALUES
-(1,	'暨大馬拉松',	'2027-01-10');
-(2,	'英文歌唱比賽',	'2027-02-22');
-(3,	'排球新生盃',	'2026-09-28');
-(4,	'籃球管院盃',	'2027-03-02');
+(1,	'暨大馬拉松',	'2027-01-10'),
+(2,	'英文歌唱比賽',	'2027-02-22'),
+(3,	'排球新生盃',	'2026-09-28'),
+(4,	'籃球管院盃',	'2027-03-02'),
 (5,	'校園演唱會',	'2027-04-18');
+
+SELECT setval('activities_event_id_seq', (SELECT MAX(event_id) FROM activities));
 
 -- 2026-10-30 07:16:08 UTC
